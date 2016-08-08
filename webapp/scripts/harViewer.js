@@ -14,12 +14,13 @@ define("harViewer", [
     "preview/harModelLoader",
     "i18n!nls/harViewer",
     "preview/requestList",
+    "preview/requestBody",
     "core/lib",
     "core/trace"
 ],
 
 function(TabView, HomeTab, AboutTab, PreviewTab, SchemaTab, DomTab, HarModel,
-    Loader, Strings, RequestList, Lib, Trace) {
+    Loader, Strings, RequestList, RequestBody, Lib, Trace) {
 
 var content = document.getElementById("content");
 
@@ -189,6 +190,22 @@ HarView.prototype = Lib.extend(new TabView(),
     setPreviewColumns: function(cols, avoidCookies)
     {
         RequestList.setVisibleColumns(cols, avoidCookies);
+    },
+
+    /**
+     * Use to add custom classes to request list entries.
+     *
+     * @param {Object} Object with the keys being the class names and the value a function.
+     *      The function receives a single request entry and must return either true or false.
+     */
+    setCustomRequestListClasses: function(customClasses)
+    {
+        RequestList.setCustomClasses(customClasses);
+    },
+
+    registerRequestBodyTab: function(tab)
+    {
+        RequestBody.registerTab(tab);
     }
 });
 
