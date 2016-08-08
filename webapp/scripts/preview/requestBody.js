@@ -82,6 +82,14 @@ RequestBody.prototype = domplate(
             }
         });
 
+        if (RequestBody.customTabs.length > 0) {
+            RequestBody.customTabs.forEach(function(tab) {
+                if (tab.canShowFile(file)) {
+                    tabView.appendTab(new tab(file));
+                }
+            });
+        }
+
         //xxxHonza
         //if (file.request.cookies || file.response.cookies)
         //    tabView.appendTab(new CookiesTab(file));
@@ -122,6 +130,11 @@ RequestBody.canDecode = function(encoding) {
 
 RequestBody.decode = function(text, encoding) {
     return ("base64" === encoding) ? atob(text) : text;
+};
+
+RequestBody.customTabs = [];
+RequestBody.registerTab = function(tab) {
+    this.customTabs.push(tab);
 };
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
