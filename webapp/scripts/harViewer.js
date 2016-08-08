@@ -200,9 +200,14 @@ HarView.prototype = Lib.extend(new TabView(),
      */
     setCustomRequestListClasses: function(customClasses)
     {
-        RequestList.setCustomClasses(customClasses);
+        RequestList.addCustomClasses(customClasses);
     },
 
+    /**
+     * Use to add custom tabs to request bodies.
+     *
+     * @param {Object} The tab to add. See preview/requestBody.js for examples.
+     */
     registerRequestBodyTab: function(tab)
     {
         RequestBody.registerTab(tab);

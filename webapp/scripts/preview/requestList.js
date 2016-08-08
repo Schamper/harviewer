@@ -415,7 +415,7 @@ RequestList.setVisibleColumns = function(cols, avoidCookies)
         Cookies.setCookie("previewCols", cols);
 };
 
-RequestList.setCustomClasses = function(customClasses) {
+RequestList.addCustomClasses = function(customClasses) {
     var attrs = {};
     var self = this;
     Object.keys(customClasses).forEach(function(k) {
