@@ -415,6 +415,16 @@ RequestList.setVisibleColumns = function(cols, avoidCookies)
         Cookies.setCookie("previewCols", cols);
 };
 
+RequestList.setCustomClasses = function(customClasses) {
+    var attrs = {};
+    var self = this;
+    Object.keys(customClasses).forEach(function(k) {
+        self.prototype[k] = customClasses[k];
+        attrs['$' + k] = '$file|' + k;
+    });
+    this.prototype.fileTag.prototype.constructor.tag.children[0].tag.parseAttrs(attrs);
+};
+
 // Initialize UI. List of columns is specified on the content element (used by CSS).
 RequestList.setVisibleColumns();
 
